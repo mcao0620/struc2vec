@@ -23,7 +23,7 @@ def generate_parameters_random_walk():
         logging.info('Executing layer {}...'.format(layer))
         weights = restore_variable_from_disk('distances_nets_weights-layer-' + str(layer))
 
-        for node, list_weights in weights.iteritems():
+        for node, list_weights in weights.items():
             if layer not in sum_weights:
                 sum_weights[layer] = 0
             if layer not in amount_edges:
@@ -52,7 +52,7 @@ def generate_parameters_random_walk():
 
         amount_neighbours[layer] = {}
 
-        for node, list_weights in weights.iteritems():
+        for node, list_weights in weights.items():
             cont_neighbours = 0
             for w in list_weights:
                 if w > average_weight[layer]:

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from time import time
 import logging, inspect
-import cPickle as pickle
+import pickle
 from itertools import islice
 import os.path
 
@@ -19,13 +19,13 @@ def is_pickle(fname):
 
 def chunks(data, size=10000):
     it = iter(data)
-    for i in xrange(0, len(data), size):
+    for i in range(0, len(data), size):
         yield {k: data[k] for k in islice(it, size)}
 
 
 def partition(lst, n):
     division = len(lst) / float(n)
-    return [lst[int(round(division * i)): int(round(division * (i + 1)))] for i in xrange(n)]
+    return [lst[int(round(division * i)): int(round(division * (i + 1)))] for i in range(n)]
 
 
 def restore_variable_from_disk(name):
