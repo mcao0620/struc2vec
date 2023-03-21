@@ -137,20 +137,35 @@ def generate_random_walks_large_graphs(num_walks, walk_length, workers, vertices
     logging.info('Creating RWs...')
     t0 = time()
 
-    walks = deque()
+    #walks = deque()
 
     for walk_iter in range(num_walks):
         random.shuffle(vertices)
         logging.info("Execution iteration {} ...".format(walk_iter))
         walk = exec_random_walks_for_chunk(vertices, graphs, alias_method_j, alias_method_q, walk_length,
                                            amount_neighbours)
-        walks.extend(walk)
+        save_variable_on_disk(walk, 'random-walk-' + str(walk_iter))
         logging.info("Iteration {} executed.".format(walk_iter))
 
     t1 = time()
     logging.info('RWs created. Time : {}m'.format((t1 - t0) / 60))
     logging.info("Saving Random Walks on disk...")
-    save_random_walks(walks)
+    with open('random_walks.txt', 'w') as file:
+        for walk_iter in range(num_walks):
+            walk = restore_variable_from_disk('random-walk-' + str(walk_iter))
+            line = ''
+            for v in walk:
+                line += str(v) + ' '
+            line += '\n'
+            file.write(line)
+
+        # for walk in walks:
+        #     line = ''
+        #     for v in walk:
+        #         line += str(v) + ' '
+        #     line += '\n'
+        #     file.write(line)
+    # save_random_walks(walks)
 
 
 def generate_random_walks(num_walks, walk_length, workers, vertices):
