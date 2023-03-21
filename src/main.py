@@ -152,3 +152,7 @@ def main(args):
 if __name__ == "__main__":
     args = parse_args()
     main(args)
+
+
+
+# python src/main.py --input graph/elliptic_txs_sampled.edgelist --output emb/elliptic_txs_sampled.emb --OPT1 True --OPT2 True

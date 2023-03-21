@@ -196,20 +196,25 @@ class Graph():
         vertices = list(self.G.keys()) if self.embedding_vertices is None else self.embedding_vertices
 
         # for large graphs, it is serially executed, because of memory use.
-        if len(self.embedding_vertices if self.embedding_vertices is not None else self.G) > 500000:
+        # if len(self.embedding_vertices if self.embedding_vertices is not None else self.G) > 500000:
 
-            with ProcessPoolExecutor(max_workers=1) as executor:
-                job = executor.submit(generate_random_walks_large_graphs, num_walks, walk_length, self.workers,
-                                      vertices)
+        #     with ProcessPoolExecutor(max_workers=1) as executor:
+        #         job = executor.submit(generate_random_walks_large_graphs, num_walks, walk_length, self.workers,
+        #                               vertices)
 
-                job.result()
+        #         job.result()
 
-        else:
+        # else:
 
-            with ProcessPoolExecutor(max_workers=1) as executor:
-                job = executor.submit(generate_random_walks, num_walks, walk_length, self.workers, vertices)
+        #     with ProcessPoolExecutor(max_workers=1) as executor:
+        #         job = executor.submit(generate_random_walks, num_walks, walk_length, self.workers, vertices)
 
-                job.result()
+        #         job.result()
+        with ProcessPoolExecutor(max_workers=1) as executor:
+            job = executor.submit(generate_random_walks_large_graphs, num_walks, walk_length, self.workers,
+                            vertices)
+
+            job.result()
 
         return
 
