@@ -134,7 +134,7 @@ def generate_random_walks_large_graphs(num_walks, walk_length, workers, vertices
     alias_method_q = restore_variable_from_disk('nets_weights_alias_method_q')
     amount_neighbours = restore_variable_from_disk('amount_neighbours')
 
-    logging.info('Creating RWs...')
+    logging.info('Creating RWs for large graph...')
     t0 = time()
 
     #walks = deque()
